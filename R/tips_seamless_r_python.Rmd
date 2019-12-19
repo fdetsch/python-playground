@@ -1,0 +1,40 @@
+---
+title: "Tips for R to Python and Vice-Versa seamlessly"
+date: "19 12 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### [Tip #1](https://costaleconomist.blogspot.com/2019/03/tips-for-r-to-python-and-vice-versa.html): dfply for dplyr alike chains
+
+```{r tip_1_r, message=FALSE}
+## R Code
+library(dplyr)
+iris %>% filter(Sepal.Length > 7.5)
+
+```
+
+```{python tip_1_py}
+## Python Code
+from dfply import * # pip install dfply
+r.iris >> filter_by(X['Sepal.Length']>7.5)
+
+```
+
+
+#### [Tip #2](https://costaleconomist.blogspot.com/2019/12/tip-2-for-r-to-python-and-vice-versa.html): Plotnine for ggplot2 alike plots
+
+```{python tip_2, results='hide'}
+from plotnine import ggplot, geom_point, aes, stat_smooth, facet_wrap
+from plotnine.data import mtcars
+
+(ggplot(mtcars, aes('wt', 'mpg', color='factor(gear)'))
+    + geom_point()
+    + stat_smooth(method='lm')
+    + facet_wrap('~gear'))
+
+```
+
