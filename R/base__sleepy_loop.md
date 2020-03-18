@@ -1,23 +1,50 @@
 The discussion related to this code is available on
 [StackOverflow](https://stackoverflow.com/questions/60736401/reticulate-doesnt-print-to-console-in-real-time).
 
-    library(reticulate)
+``` r
+library(reticulate)
+```
 
-    ### . run code ----
+``` r
+### QUESTION ====
 
-    py_run_string("
-    import time
+### . run code ----
 
-    for i in range(5):
-       print(str(i))
-       time.sleep(1.5)
-    ")
+py_run_string("
+import time
 
-    ### . run file ----
+for i in range(5):
+   print(str(i))
+   time.sleep(1.5)
+")
+```
 
-    py_run_file(
-      "src/base__sleepy_loop.py"
-    )
+``` r
+### . run file ----
+
+py_run_file(
+  "src/base__sleepy_loop.py"
+)
+```
+
+``` r
+### SOLUTION ====
+
+py_run_string("
+import time
+from sys import stdout
+
+for i in range(5):
+   print(str(i))
+   sys.stdout.flush()
+   time.sleep(1.5)
+")
+# 0
+# 1
+# 2
+# 3
+# 4
+```
 
 ### ZZ. Final things last
 
@@ -25,7 +52,9 @@ The discussion related to this code is available on
 
 <summary>Session info (click to view)</summary>
 
-    devtools::session_info()
+``` r
+devtools::session_info()
+```
 
     ## - Session info ---------------------------------------------------------------
     ##  setting  value                       

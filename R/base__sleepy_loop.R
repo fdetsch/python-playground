@@ -2,7 +2,8 @@
 #' title: '**reticulate** does not print to console in real time'
 #' author: "`r Sys.getenv('USERNAME')`"
 #' output:
-#'   md_document
+#'   md_document:
+#'     variant: markdown_github
 #' ---
 #+ setup, include=FALSE
 knitr::opts_chunk[['set']](collapse=FALSE, message=FALSE, warning=FALSE, prompt=FALSE)
@@ -14,6 +15,8 @@ library(reticulate)
 
 
 #+ py_run_string
+### QUESTION ====
+
 ### . run code ----
 
 py_run_string("
@@ -31,6 +34,25 @@ for i in range(5):
 py_run_file(
   "src/base__sleepy_loop.py"
 )
+
+
+#+ solution
+### SOLUTION ====
+
+py_run_string("
+import time
+from sys import stdout
+
+for i in range(5):
+   print(str(i))
+   sys.stdout.flush()
+   time.sleep(1.5)
+")
+# 0
+# 1
+# 2
+# 3
+# 4
 
 #'
 #' ### ZZ. Final things last
