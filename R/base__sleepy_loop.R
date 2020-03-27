@@ -39,6 +39,7 @@ py_run_file(
 #+ solution
 ### SOLUTION ====
 
+## sys.stdout.flush()
 py_run_string("
 import time
 from sys import stdout
@@ -46,6 +47,20 @@ from sys import stdout
 for i in range(5):
    print(str(i))
    sys.stdout.flush()
+   time.sleep(1.5)
+")
+# 0
+# 1
+# 2
+# 3
+# 4
+
+## print(..., flush = True)
+py_run_string("
+import time
+
+for i in range(5):
+   print(str(i), flush = True)
    time.sleep(1.5)
 ")
 # 0

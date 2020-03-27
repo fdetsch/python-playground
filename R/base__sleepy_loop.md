@@ -30,6 +30,7 @@ py_run_file(
 ``` r
 ### SOLUTION ====
 
+## sys.stdout.flush()
 py_run_string("
 import time
 from sys import stdout
@@ -37,6 +38,20 @@ from sys import stdout
 for i in range(5):
    print(str(i))
    sys.stdout.flush()
+   time.sleep(1.5)
+")
+# 0
+# 1
+# 2
+# 3
+# 4
+
+## print(..., flush = True)
+py_run_string("
+import time
+
+for i in range(5):
+   print(str(i), flush = True)
    time.sleep(1.5)
 ")
 # 0
@@ -66,7 +81,7 @@ devtools::session_info()
     ##  collate  German_Germany.1252         
     ##  ctype    German_Germany.1252         
     ##  tz       Europe/Berlin               
-    ##  date     2020-03-18                  
+    ##  date     2020-03-27                  
     ## 
     ## - Packages -------------------------------------------------------------------
     ##  package     * version   date       lib source                             
@@ -99,9 +114,9 @@ devtools::session_info()
     ##  prompt        1.0.0     2020-01-23 [1] Github (gaborcsardi/prompt@b332c42)
     ##  ps            1.3.2     2020-02-13 [1] CRAN (R 3.6.2)                     
     ##  R6            2.4.1     2019-11-12 [1] CRAN (R 3.6.1)                     
-    ##  Rcpp          1.0.3     2019-11-08 [1] CRAN (R 3.6.1)                     
+    ##  Rcpp          1.0.4     2020-03-17 [1] CRAN (R 3.6.3)                     
     ##  remotes       2.1.1     2020-02-15 [1] CRAN (R 3.6.2)                     
-    ##  reticulate  * 1.14-9001 2020-03-18 [1] Github (rstudio/reticulate@7432501)
+    ##  reticulate  * 1.14-9002 2020-03-27 [1] Github (rstudio/reticulate@21a9518)
     ##  rlang         0.4.5     2020-03-01 [1] CRAN (R 3.6.2)                     
     ##  rmarkdown     2.1       2020-01-20 [1] CRAN (R 3.6.2)                     
     ##  rprojroot     1.3-2     2018-01-03 [1] CRAN (R 3.6.1)                     
