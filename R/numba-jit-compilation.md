@@ -1,0 +1,46 @@
+Numba: JIT Compilation, But For Python
+================
+Florian Detsch
+13 10 2020
+
+Code taken from and details available
+[here](https://towardsdatascience.com/numba-jit-compilation-but-for-python-373fc2f848d6).
+
+    ### . single core ----
+
+    import random
+    import time
+    from numba import jit
+
+    def monte_carlo_pi(nsamples = int(1e7)):
+        acc = 0
+        for i in range(nsamples):
+            x = random.random()
+            y = random.random()
+            if (x ** 2 + y ** 2) < 1.0:
+                acc += 1
+        return 4.0 * acc / nsamples
+
+    start_time = time.time()
+    r1 = monte_carlo_pi()
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    ## --- 6.793410539627075 seconds ---
+
+    ### . multi core ----
+
+    @jit(nopython=True)
+    def monte_carlo_pi(nsamples = int(1e7)):
+        acc = 0
+        for i in range(nsamples):
+            x = random.random()
+            y = random.random()
+            if (x ** 2 + y ** 2) < 1.0:
+                acc += 1
+        return 4.0 * acc / nsamples
+
+    start_time = time.time()
+    r2 = monte_carlo_pi()
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    ## --- 0.554323673248291 seconds ---
