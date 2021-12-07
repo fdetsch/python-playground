@@ -20,3 +20,6 @@ example.add(i = 2, j = 3)
 example.add() # uses defaults
 
 help(example)
+
+example.vec1d()
+example.vec2d()
